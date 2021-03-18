@@ -1,11 +1,11 @@
 package com.sd.services.interfaces
 
-import com.sd.pojo.WeatherForecastData
+import com.sd.pojo.WeatherForecastDataDTO
 
 /**
  * @author Timofti Gabriel
  */
 
 interface WeatherForecastInterface {
-    fun getForecastData(locationId: Int): WeatherForecastData
+    fun getForecastData(locationId: Int): WeatherForecastDataDTO
 }

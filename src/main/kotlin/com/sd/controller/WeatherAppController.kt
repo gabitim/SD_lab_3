@@ -1,6 +1,8 @@
 package com.sd.controller
 
+
 import com.sd.services.ForecastService
+
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.PathVariable
@@ -21,7 +23,9 @@ class WeatherAppController {
     @RequestMapping("/getforecast/{location}", method =
     [RequestMethod.GET])
     @ResponseBody
+
     fun viewForecast(@PathVariable location: String): String {
         return forecastService.viewForeCast(location)
+
     }
 }

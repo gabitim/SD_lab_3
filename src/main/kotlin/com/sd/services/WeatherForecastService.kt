@@ -1,8 +1,9 @@
 package com.sd.services
 
-import com.sd.pojo.WeatherForecastData
+import com.sd.pojo.WeatherForecastDataDTO
 import com.sd.services.interfaces.WeatherForecastInterface
 import org.json.JSONObject
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.net.URL
 
@@ -11,8 +12,12 @@ import java.net.URL
  */
 
 @Service
-class WeatherForecastService (private val timeService: TimeService) : WeatherForecastInterface {
-    override fun getForecastData(locationId: Int): WeatherForecastData {
+class WeatherForecastService : WeatherForecastInterface {
+
+    @Autowired
+    private lateinit var timeService : TimeService
+
+    override fun getForecastData(locationId: Int): WeatherForecastDataDTO {
 
 // ID-ul locaţiei nu trebuie codificat, deoarece este numeric
         val forecastDataURL = URL("https://www.metaweather.com/api/location/$locationId/")
@@ -25,7 +30,7 @@ class WeatherForecastService (private val timeService: TimeService) : WeatherFor
         val weatherDataObject = responseRootObject.getJSONArray("consolidated_weather").getJSONObject(0)
 
 // construire şi returnare obiect POJO care încapsulează datele meteo
-        return WeatherForecastData(
+        return WeatherForecastDataDTO(
             location = responseRootObject.getString("title"),
             date = timeService.getCurrentTime(),
             weatherState = weatherDataObject.getString("weather_state_name"),

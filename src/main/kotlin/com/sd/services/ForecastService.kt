@@ -1,6 +1,6 @@
 package com.sd.services
 
-import com.sd.pojo.WeatherForecastData
+import com.sd.pojo.WeatherForecastDataDTO
 import com.sd.services.interfaces.LocationSearchInterface
 import com.sd.services.interfaces.WeatherForecastInterface
 import org.springframework.beans.factory.annotation.Autowired
@@ -26,12 +26,9 @@ class ForecastService {
             return "Nu s-au putut gasi date meteo pentru cuvintele cheie \"$location\"!"
         }
 
-        // pe baza ID-ului de locaţie, se interoghează al doilea serviciu care returnează datele meteo
-        // încapsulate într-un obiect POJO
-        val rawForecastData: WeatherForecastData =
-            weatherForecastService.getForecastData(locationId)
+        val rawForecastDataDTO: WeatherForecastDataDTO = weatherForecastService.getForecastData(locationId)
 
-        // fiind obiect POJO, funcţia toString() este suprascrisă pentru o afişare mai prietenoasă
-        return rawForecastData.toString()
+        // funcţia toString() este suprascrisă pentru o afişare mai prietenoasă
+        return rawForecastDataDTO.toWeatherForecastData().toString()
     }
 }
