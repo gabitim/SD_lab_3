@@ -1,6 +1,7 @@
 package com.sd.controller
 
 import com.sd.pojo.WeatherForecastData
+import com.sd.pojo.WeatherForecastDataDTO
 import com.sd.services.interfaces.LocationSearchInterface
 import com.sd.services.interfaces.WeatherForecastInterface
 import org.springframework.beans.factory.annotation.Autowired
@@ -33,11 +34,10 @@ class WeatherAppController {
         }
 
         // pe baza ID-ului de locaţie, se interoghează al doilea serviciu care returnează datele meteo
-        // încapsulate într-un obiect POJO
-        val rawForecastData: WeatherForecastData =
-            weatherForecastService.getForecastData(locationId)
+        // Am adaugat un DTO
+        val rawForecastDataDTO: WeatherForecastDataDTO = weatherForecastService.getForecastData(locationId)
 
-        // fiind obiect POJO, funcţia toString() este suprascrisă pentru o afişare mai prietenoasă
-                return rawForecastData.toString()
+        // funcţia toString() este suprascrisă pentru o afişare mai prietenoasă
+        return rawForecastDataDTO.toWeatherForecastData().toString()
     }
 }
