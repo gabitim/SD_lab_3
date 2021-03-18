@@ -7,5 +7,5 @@ import com.sd.pojo.WeatherForecastDataDTO
  */
 
 interface WeatherForecastInterface {
-    fun getForecastData(locationId: Int): WeatherForecastDataDTO
+    fun getForecastData(location: String): WeatherForecastDataDTO?
 }
